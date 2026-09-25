@@ -1,1 +1,407 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Acme Outfitters (demo site)</title>
+<meta name="description" content="Fictional outdoor retailer used to generate demo events for Hightouch documentation. Not a real store.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+<!--
+  Hightouch Events (browser SDK)
+  1. In Hightouch: Event Collection > Event sources > Acme Outfitters website > Setup.
+  2. Copy the write key and paste it below in place of REPLACE_WITH_WRITE_KEY.
+  Browser write keys are public by design, so it's fine to commit this file.
+-->
+<script>
+  window.ACME_WRITE_KEY = "REPLACE_WITH_WRITE_KEY";
+  window.ACME_API_HOST = "us-east-1.hightouch-events.com";
+</script>
+<script type="text/javascript">
+if (window.ACME_WRITE_KEY && window.ACME_WRITE_KEY.indexOf("REPLACE_") !== 0) {
+!function(){var e=window.htevents=window.htevents||[];if(!e.initialize)if(e.invoked)window.console&&console.error&&console.error("Hightouch snippet included twice.");else{e.invoked=!0,e.methods=["trackSubmit","trackClick","trackLink","trackForm","pageview","identify","reset","group","track","ready","alias","debug","page","once","off","on","addSourceMiddleware","addIntegrationMiddleware","setAnonymousId","addDestinationMiddleware"],e.factory=function(t){return function(){var n=Array.prototype.slice.call(arguments);return n.unshift(t),e.push(n),e}};for(var t=0;t<e.methods.length;t++){var n=e.methods[t];e[n]=e.factory(n)}e.load=function(t,n){var o=document.createElement("script");o.type="text/javascript",o.async=!0,o.src="https://cdn.hightouch-events.com/browser/release/v1-latest/events.min.js";var r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(o,r),e._loadOptions=n,e._writeKey=t},e.SNIPPET_VERSION="0.0.1",
+e.load(window.ACME_WRITE_KEY,{apiHost:window.ACME_API_HOST}),
+e.page("Home")}}();
+}
+</script>
+
+<style>
+  :root{
+    --ridge:#1F4D3A; --summit:#E8622C; --granite:#2B2F33; --dust:#EFE8DC;
+    --glacier:#9CC3C9; --snow:#FFFFFF; --line:#DDD4C4; --muted:#5E6468;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--dust);color:var(--granite);font:16px/1.5 Inter,Arial,sans-serif}
+  a{color:inherit}
+  button{font:inherit;cursor:pointer}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  h1,h2,h3,.display{font-family:"Barlow Condensed","Arial Narrow",sans-serif;font-weight:700;letter-spacing:.5px;line-height:1.05;margin:0}
+
+  .demo-bar{background:var(--granite);color:var(--dust);font-size:13px;text-align:center;padding:6px 16px}
+  .demo-bar strong{color:var(--glacier)}
+
+  header{background:var(--ridge);color:var(--snow);position:sticky;top:0;z-index:20}
+  .nav{display:flex;align-items:center;gap:24px;height:68px}
+  .logo img{height:30px;display:block}
+  .nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex:1}
+  .nav ul button{background:none;border:0;color:var(--snow);opacity:.9;padding:6px 0;font-weight:600;font-size:15px}
+  .nav ul button:hover{opacity:1;text-decoration:underline;text-underline-offset:6px}
+  .nav-actions{display:flex;gap:10px;align-items:center}
+  .ghost{background:transparent;border:1px solid rgba(255,255,255,.5);color:var(--snow);border-radius:4px;padding:7px 12px;font-size:14px;font-weight:600}
+  .cart-btn{position:relative}
+  .badge{position:absolute;top:-7px;right:-7px;background:var(--summit);color:#fff;border-radius:10px;font-size:11px;min-width:18px;height:18px;line-height:18px;text-align:center;padding:0 5px}
+
+  .hero{display:grid;grid-template-columns:1.1fr 1fr;gap:32px;align-items:center;padding:48px 0 36px}
+  .eyebrow{text-transform:uppercase;letter-spacing:2px;font-size:12px;font-weight:600;color:var(--ridge)}
+  .hero h1{font-size:64px;color:var(--ridge);margin:10px 0 16px}
+  .hero p{font-size:18px;max-width:30em;margin:0 0 24px}
+  .hero-img{background:#EEE7DA;border-radius:8px;overflow:hidden;aspect-ratio:1/1}
+  .hero-img img{width:100%;height:100%;object-fit:cover;display:block}
+  .cta{background:var(--summit);color:#fff;border:0;border-radius:4px;padding:13px 22px;font-weight:600;font-size:16px}
+  .cta.secondary{background:transparent;color:var(--ridge);border:2px solid var(--ridge);margin-left:8px}
+
+  .strip{background:var(--ridge);color:var(--dust)}
+  .strip .wrap{display:flex;justify-content:space-around;gap:16px;padding:14px 20px;font-size:14px;flex-wrap:wrap}
+
+  section{padding:44px 0}
+  .section-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px;flex-wrap:wrap}
+  .section-head h2{font-size:40px;color:var(--ridge)}
+  .chips{display:flex;gap:8px;flex-wrap:wrap}
+  .chip{background:var(--snow);border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px;font-weight:600;color:var(--granite)}
+  .chip[aria-pressed="true"]{background:var(--ridge);border-color:var(--ridge);color:var(--snow)}
+
+  .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+  .card{background:var(--snow);border:1px solid var(--line);border-radius:8px;overflow:hidden;display:flex;flex-direction:column;text-align:left;padding:0;color:inherit}
+  .card:hover{border-color:var(--ridge);box-shadow:0 4px 14px rgba(31,77,58,.12)}
+  .card .img{background:#EEE7DA;aspect-ratio:1/1}
+  .card img{width:100%;height:100%;object-fit:cover;display:block}
+  .card .body{padding:12px 14px 14px}
+  .card .cat{font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+  .card .name{font-weight:600;margin:2px 0 4px}
+  .card .price{font-weight:600;color:var(--ridge)}
+
+  .stores{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .store{background:var(--snow);border:1px solid var(--line);border-radius:8px;padding:14px}
+  .store b{display:block;font-family:"Barlow Condensed",sans-serif;font-size:22px;color:var(--ridge)}
+
+  .signup{background:var(--ridge);color:var(--dust);border-radius:8px;padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:center}
+  .signup h2{font-size:38px;color:var(--snow)}
+  .signup form{display:flex;gap:8px}
+  .signup input{flex:1;min-width:0;border:0;border-radius:4px;padding:12px;font:inherit}
+  .fine{font-size:12px;opacity:.8;margin-top:8px}
+
+  footer{padding:28px 0 60px;font-size:13px;color:var(--muted)}
+
+  /* dialogs */
+  .scrim{position:fixed;inset:0;background:rgba(43,47,51,.55);display:none;z-index:40}
+  .scrim.open{display:block}
+  .modal{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(860px,calc(100vw - 32px));max-height:calc(100vh - 32px);overflow:auto;background:var(--snow);border-radius:10px;z-index:50;display:none}
+  .modal.open{display:grid;grid-template-columns:1fr 1fr}
+  .modal .img{background:#EEE7DA}
+  .modal .img img{width:100%;display:block}
+  .modal .info{padding:28px}
+  .modal h3{font-size:36px;color:var(--ridge);margin:4px 0 8px}
+  .x{position:absolute;right:12px;top:10px;background:none;border:0;font-size:24px;color:var(--granite)}
+  .sizes{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0 20px}
+  .sizes button{border:1px solid var(--line);background:var(--snow);border-radius:4px;padding:6px 10px;min-width:44px}
+  .sizes button[aria-pressed="true"]{border-color:var(--ridge);background:var(--ridge);color:#fff}
+
+  .drawer{position:fixed;top:0;right:0;bottom:0;width:min(400px,100vw);background:var(--snow);z-index:50;transform:translateX(100%);transition:transform .2s;display:flex;flex-direction:column}
+  .drawer.open{transform:none}
+  .drawer header{position:static;background:var(--snow);color:var(--granite);display:flex;justify-content:space-between;align-items:center;padding:18px 20px;border-bottom:1px solid var(--line)}
+  .drawer h3{font-size:28px;color:var(--ridge)}
+  .lines{flex:1;overflow:auto;padding:8px 20px}
+  .line{display:grid;grid-template-columns:56px 1fr auto;gap:12px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .line img{width:56px;height:56px;object-fit:cover;border-radius:4px;background:#EEE7DA}
+  .drawer .foot{padding:18px 20px;border-top:1px solid var(--line)}
+  .total{display:flex;justify-content:space-between;font-weight:600;margin-bottom:12px}
+  .wide{width:100%}
+  .note{font-size:12px;color:var(--muted);margin-top:8px}
+
+  .toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--granite);color:var(--dust);padding:10px 16px;border-radius:6px;font-size:14px;z-index:60;opacity:0;transition:opacity .2s;pointer-events:none}
+  .toast.show{opacity:1}
+
+  /* event log (?debug=1) */
+  .evlog{position:fixed;left:16px;bottom:16px;width:360px;max-height:45vh;overflow:auto;background:#14261D;color:#D8F0E4;font:12px/1.45 ui-monospace,Menlo,monospace;border-radius:8px;padding:10px 12px;z-index:70;display:none;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+  .evlog.on{display:block}
+  .evlog b{color:var(--glacier)}
+  .evlog .warn{color:#FFB38A}
+
+  @media (max-width:900px){
+    .hero{grid-template-columns:1fr}.hero h1{font-size:48px}
+    .grid{grid-template-columns:repeat(2,1fr)} .stores{grid-template-columns:repeat(2,1fr)}
+    .signup{grid-template-columns:1fr} .nav ul{display:none}
+    .modal.open{grid-template-columns:1fr}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-bar"><strong>Demo site.</strong> Acme Outfitters is a fictional brand used for Hightouch documentation. Nothing here is for sale, and no payment details are collected.</div>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#" aria-label="Acme Outfitters home"><img src="_acme-logo-white.png" alt="Acme Outfitters"></a>
+    <ul>
+      <li><button data-nav="Road shoes">Road</button></li>
+      <li><button data-nav="Trail shoes">Trail</button></li>
+      <li><button data-nav="Hiking boots">Hiking</button></li>
+      <li><button data-nav="Apparel">Apparel</button></li>
+      <li><button data-nav="Socks and accessories">Accessories</button></li>
+      <li><button data-nav="Kids">Kids</button></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="ghost" id="signin">Sign in</button>
+      <button class="ghost cart-btn" id="cartbtn" aria-label="Open cart">Cart<span class="badge" id="cartcount">0</span></button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero">
+    <div>
+      <div class="eyebrow">New for the wet season</div>
+      <h1>Ridgeline 4.<br>Grip for loose, wet descents.</h1>
+      <p>Our best-selling trail shoe, rebuilt with deeper lugs and a softer heel. Tested on the muddiest singletrack outside Bend and Asheville.</p>
+      <button class="cta" id="hero-cta">Shop trail shoes</button>
+      <button class="cta secondary" id="hero-view">View Ridgeline 4</button>
+    </div>
+    <div class="hero-img"><img src="ridgeline-4.png" alt="Acme Ridgeline 4 trail shoe"></div>
+  </div>
+
+  <div class="strip"><div class="wrap">
+    <span>Free shipping over $100</span><span>60-day wear test returns</span><span>Acme Rewards on every order</span><span>8 stores in mountain and college towns</span>
+  </div></div>
+
+  <section class="wrap" id="shop">
+    <div class="section-head">
+      <h2 id="shop-title">Shop all gear</h2>
+      <div class="chips" id="chips"></div>
+    </div>
+    <div class="grid" id="grid"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="section-head"><h2>Find a store</h2></div>
+    <div class="stores" id="stores"></div>
+  </section>
+
+  <section class="wrap">
+    <div class="signup">
+      <div>
+        <h2>Trail notes, twice a month</h2>
+        <p style="margin:8px 0 0">New gear, trail conditions from our stores, and early access to sales.</p>
+      </div>
+      <div>
+        <form id="signup">
+          <input type="email" id="email" required placeholder="you@example.com" aria-label="Email address">
+          <button class="cta" type="submit">Sign up</button>
+        </form>
+        <div class="fine">Demo form: use an address at example.com. It's sent to Hightouch as an identify call.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="wrap">
+  © Acme Outfitters (fictional). Built to generate sample events for Hightouch docs. Add <code>?debug=1</code> to the URL to show the event log.
+</footer>
+
+<div class="scrim" id="scrim"></div>
+
+<div class="modal" id="pdp" role="dialog" aria-modal="true" aria-labelledby="pdp-name">
+  <button class="x" data-close aria-label="Close">×</button>
+  <div class="img"><img id="pdp-img" alt=""></div>
+  <div class="info">
+    <div class="eyebrow" id="pdp-cat"></div>
+    <h3 id="pdp-name"></h3>
+    <div class="price" id="pdp-price" style="font-size:20px;font-weight:600;color:var(--ridge)"></div>
+    <p id="pdp-desc"></p>
+    <div class="sizes" id="pdp-sizes"></div>
+    <button class="cta wide" id="pdp-add">Add to cart</button>
+    <div class="note">SKU <span id="pdp-sku"></span></div>
+  </div>
+</div>
+
+<aside class="drawer" id="cart" aria-label="Cart">
+  <header><h3>Your cart</h3><button class="x" style="position:static" data-close aria-label="Close">×</button></header>
+  <div class="lines" id="lines"></div>
+  <div class="foot">
+    <div class="total"><span>Subtotal</span><span id="subtotal">$0</span></div>
+    <button class="cta wide" id="checkout">Check out</button>
+    <button class="cta wide" id="place" style="display:none;margin-top:8px;background:var(--ridge)">Place demo order</button>
+    <div class="note" id="checkout-note">Demo checkout: no payment is taken. "Place demo order" sends an Order Completed event.</div>
+  </div>
+</aside>
+
+<div class="toast" id="toast"></div>
+<div class="evlog" id="evlog"></div>
+
+<script>
+(function(){
+  var PRODUCTS = [
+    {id:"ACM-RD-001",name:"Acme Pacer Lite",cat:"Road shoes",price:138,img:"pacer-lite.png",desc:"Everyday road trainer with a soft, light midsole for easy and long runs.",sizes:"shoe"},
+    {id:"ACM-RD-003",name:"Acme Tempo 7",cat:"Road shoes",price:164,img:"tempo-7.png",desc:"Responsive road shoe for tempo runs, intervals, and faster workouts.",sizes:"shoe"},
+    {id:"ACM-RD-005",name:"Acme Cadence Racer",cat:"Road shoes",price:219,img:"cadence-racer.png",desc:"Lightweight race-day shoe with a stiff plate for your fastest 10K to marathon.",sizes:"shoe"},
+    {id:"ACM-TR-002",name:"Acme Ridgeline 4",cat:"Trail shoes",price:152,img:"ridgeline-4.png",desc:"Our best-selling trail shoe, with deep lugs for grip on loose, wet descents.",sizes:"shoe"},
+    {id:"ACM-TR-004",name:"Acme Scree Trail",cat:"Trail shoes",price:146,img:"scree-trail.png",desc:"Low-profile trail shoe with a rock plate for technical, rocky singletrack.",sizes:"shoe"},
+    {id:"ACM-TR-005",name:"Acme Switchback GTX",cat:"Trail shoes",price:188,img:"switchback-gtx.png",desc:"Our only waterproof trail shoe, for creek crossings and rainy-season miles.",sizes:"shoe"},
+    {id:"ACM-HK-001",name:"Acme Summit Mid",cat:"Hiking boots",price:210,img:"summit-mid.png",desc:"Supportive mid-height boot for multi-day hikes with a full pack.",sizes:"shoe"},
+    {id:"ACM-HK-003",name:"Acme Basecamp Low",cat:"Hiking boots",price:175,img:"basecamp-low.png",desc:"Low-cut hiking shoe for day hikes and well-kept trails.",sizes:"shoe"},
+    {id:"ACM-AP-001",name:"Acme Coastal Windshell",cat:"Apparel",price:129,img:"coastal-windshell.png",desc:"Packable wind jacket that stuffs into its own pocket for exposed ridgelines.",sizes:"apparel"},
+    {id:"ACM-AP-003",name:"Acme Thermal Half-Zip",cat:"Apparel",price:98,img:"thermal-half-zip.png",desc:"Brushed-grid midlayer for cold starts and first cold mornings.",sizes:"apparel"},
+    {id:"ACM-AP-005",name:"Acme Trail Short 5in",cat:"Apparel",price:64,img:"trail-short-5in.png",desc:"Five-inch trail short with a zip pocket that fits a phone and a gel.",sizes:"apparel"},
+    {id:"ACM-AC-001",name:"Acme Merino Crew 3-Pack",cat:"Socks and accessories",price:38,img:"merino-crew-3-pack.png",desc:"Three pairs of cushioned merino crew socks for running and hiking.",sizes:"sock"},
+    {id:"ACM-AC-002",name:"Acme Trail Gaiters",cat:"Socks and accessories",price:45,img:"trail-gaiters.png",desc:"Low trail gaiters that keep grit and small rocks out of your shoes.",sizes:"one"},
+    {id:"ACM-AC-003",name:"Acme Hydration Vest 5L",cat:"Socks and accessories",price:112,img:"hydration-vest-5l.png",desc:"Five-liter running vest with two soft flasks and room for a layer.",sizes:"apparel"},
+    {id:"ACM-AC-004",name:"Acme Trucker Cap",cat:"Socks and accessories",price:32,img:"trucker-cap.png",desc:"Mesh-back trucker cap with the Acme mark.",sizes:"one"},
+    {id:"ACM-KD-001",name:"Acme Ridgeline Jr",cat:"Kids",price:92,img:"ridgeline-jr.png",desc:"The kids' version of the Ridgeline 4, with a bungee lace for quick on and off.",sizes:"kids"},
+    {id:"ACM-GC-001",name:"Acme Gift Card",cat:"Gift card",price:75,img:"gift-card.png",desc:"Digital gift card, good online and at all eight Acme stores.",sizes:"one"}
+  ];
+  var SIZES = {shoe:["7","8","9","10","11","12"],apparel:["XS","S","M","L","XL"],sock:["S","M","L"],kids:["11K","12K","13K","1Y","2Y","3Y"],one:["One size"]};
+  var STORES = [["Portland","OR"],["Boulder","CO"],["Asheville","NC"],["Bend","OR"],["Burlington","VT"],["Santa Fe","NM"],["Bozeman","MT"],["Ann Arbor","MI"]];
+  var CATS = ["All","Road shoes","Trail shoes","Hiking boots","Apparel","Socks and accessories","Kids"];
+
+  var $ = function(s){return document.querySelector(s)};
+  var money = function(n){return "$"+n.toFixed(2).replace(/\.00$/,"")};
+  var cart = [], current = null, currentSize = null, activeCat = "All";
+  var DEBUG = /[?&]debug=1/.test(location.search);
+  var hasKey = window.ACME_WRITE_KEY && window.ACME_WRITE_KEY.indexOf("REPLACE_") !== 0;
+
+  // ---------- tracking helpers ----------
+  var log = $("#evlog"); if (DEBUG) log.classList.add("on");
+  function logLine(html){ if(!DEBUG) return; var d=document.createElement("div"); d.innerHTML=html; log.prepend(d); }
+  if (!hasKey) logLine('<span class="warn">No write key set. Events are logged here but not sent.</span>');
+  else logLine("<b>page</b> Home");
+  function productProps(p, extra){
+    var o = {product_id:p.id, sku:p.id, name:p.name, category:p.cat, price:p.price, currency:"USD", image_url:new URL(p.img, location.href).href};
+    for (var k in extra) o[k]=extra[k];
+    return o;
+  }
+  function track(name, props){
+    if (hasKey && window.htevents) window.htevents.track(name, props);
+    logLine("<b>track</b> "+name+" "+escapeHtml(JSON.stringify(props)));
+  }
+  function identify(id, traits){
+    if (hasKey && window.htevents) window.htevents.identify(id, traits);
+    logLine("<b>identify</b> "+escapeHtml(String(id))+" "+escapeHtml(JSON.stringify(traits)));
+  }
+  function escapeHtml(s){return s.replace(/[&<>]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;"}[c]})}
+  function toast(msg){ var t=$("#toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(toast._t); toast._t=setTimeout(function(){t.classList.remove("show")},1800); }
+
+  // ---------- render ----------
+  function renderChips(){
+    $("#chips").innerHTML = CATS.map(function(c){return '<button class="chip" aria-pressed="'+(c===activeCat)+'" data-cat="'+c+'">'+(c==="Socks and accessories"?"Accessories":c)+'</button>'}).join("");
+  }
+  function renderGrid(){
+    var list = PRODUCTS.filter(function(p){return activeCat==="All"||p.cat===activeCat});
+    $("#grid").innerHTML = list.map(function(p){
+      return '<button class="card" data-id="'+p.id+'"><div class="img"><img loading="lazy" src="'+p.img+'" alt="'+p.name+'"></div><div class="body"><div class="cat">'+p.cat+'</div><div class="name">'+p.name+'</div><div class="price">'+money(p.price)+'</div></div></button>';
+    }).join("");
+    $("#shop-title").textContent = activeCat==="All" ? "Shop all gear" : activeCat;
+  }
+  $("#stores").innerHTML = STORES.map(function(s){return '<div class="store"><b>'+s[0]+'</b>'+s[1]+' · Open daily 10–7</div>'}).join("");
+
+  function setCategory(cat, source){
+    activeCat = cat; renderChips(); renderGrid();
+    if (cat!=="All") track("Product List Viewed", {list_id:cat.toLowerCase().replace(/\s+/g,"-"), category:cat, source:source});
+  }
+
+  // ---------- product detail ----------
+  function openProduct(id, source){
+    current = PRODUCTS.find(function(p){return p.id===id}); currentSize=null;
+    $("#pdp-img").src=current.img; $("#pdp-img").alt=current.name;
+    $("#pdp-cat").textContent=current.cat; $("#pdp-name").textContent=current.name;
+    $("#pdp-price").textContent=money(current.price); $("#pdp-desc").textContent=current.desc; $("#pdp-sku").textContent=current.id;
+    var sz = SIZES[current.sizes];
+    $("#pdp-sizes").innerHTML = sz.map(function(s){return '<button aria-pressed="false" data-size="'+s+'">'+s+'</button>'}).join("");
+    if (sz.length===1) { currentSize=sz[0]; $("#pdp-sizes button").setAttribute("aria-pressed","true"); }
+    open("#pdp");
+    track("Product Viewed", productProps(current, {source:source}));
+  }
+  $("#pdp-sizes").addEventListener("click", function(e){
+    var b=e.target.closest("button"); if(!b) return;
+    [].forEach.call(this.children,function(c){c.setAttribute("aria-pressed","false")});
+    b.setAttribute("aria-pressed","true"); currentSize=b.dataset.size;
+  });
+  $("#pdp-add").addEventListener("click", function(){
+    if(!currentSize){ toast("Pick a size first"); return; }
+    var line = cart.find(function(l){return l.p.id===current.id && l.size===currentSize});
+    if (line) line.qty++; else cart.push({p:current,size:currentSize,qty:1});
+    renderCart();
+    track("Product Added", productProps(current, {variant:currentSize, quantity:1, cart_size:cartQty()}));
+    closeAll(); toast(current.name+" added to cart");
+  });
+
+  // ---------- cart + checkout ----------
+  function cartQty(){return cart.reduce(function(n,l){return n+l.qty},0)}
+  function cartTotal(){return cart.reduce(function(n,l){return n+l.qty*l.p.price},0)}
+  function cartProducts(){return cart.map(function(l){return {product_id:l.p.id, sku:l.p.id, name:l.p.name, category:l.p.cat, price:l.p.price, quantity:l.qty, variant:l.size}})}
+  function renderCart(){
+    $("#cartcount").textContent = cartQty();
+    $("#cartcount").style.display = cartQty() ? "" : "none";
+    $("#lines").innerHTML = cart.length ? cart.map(function(l,i){
+      return '<div class="line"><img src="'+l.p.img+'" alt=""><div><b>'+l.p.name+'</b><br>Size '+l.size+' · Qty '+l.qty+'</div><div>'+money(l.p.price*l.qty)+'<br><button data-remove="'+i+'" style="background:none;border:0;color:var(--muted);font-size:12px;padding:0">Remove</button></div></div>';
+    }).join("") : '<p style="color:var(--muted)">Your cart is empty.</p>';
+    $("#subtotal").textContent = money(cartTotal());
+    $("#checkout").disabled = !cart.length;
+  }
+  $("#lines").addEventListener("click", function(e){
+    var b=e.target.closest("[data-remove]"); if(!b) return;
+    var l=cart.splice(+b.dataset.remove,1)[0]; renderCart();
+    track("Product Removed", productProps(l.p, {variant:l.size, quantity:l.qty}));
+  });
+  $("#cartbtn").addEventListener("click", function(){
+    open("#cart"); $("#place").style.display="none";
+    track("Cart Viewed", {products:cartProducts(), value:cartTotal(), currency:"USD"});
+  });
+  $("#checkout").addEventListener("click", function(){
+    if(!cart.length) return;
+    $("#place").style.display="block";
+    track("Checkout Started", {value:cartTotal(), revenue:cartTotal(), currency:"USD", products:cartProducts()});
+  });
+  $("#place").addEventListener("click", function(){
+    var id = "web_"+Date.now().toString(36);
+    var total = cartTotal();
+    track("Order Completed", {order_id:id, total:total, revenue:total, currency:"USD", channel:"web", products:cartProducts()});
+    cart=[]; renderCart(); closeAll(); toast("Demo order "+id+" placed. Nothing was charged.");
+  });
+
+  // ---------- sign in + newsletter ----------
+  $("#signin").addEventListener("click", function(){
+    var email = prompt("Demo sign-in: enter an email at example.com","trail.runner@example.com");
+    if(!email) return;
+    identify(email.toLowerCase(), {email:email.toLowerCase(), source:"web_sign_in"});
+    track("Signed In", {method:"email"});
+    $("#signin").textContent = email.split("@")[0];
+  });
+  $("#signup").addEventListener("submit", function(e){
+    e.preventDefault();
+    var email = $("#email").value.trim().toLowerCase(); if(!email) return;
+    identify(email, {email:email, email_subscribed:true});
+    track("Email Subscribed", {list:"Trail notes", source:"homepage_footer"});
+    this.reset(); toast("Subscribed "+email+" (demo)");
+  });
+
+  // ---------- nav + dialogs ----------
+  function open(sel){ $("#scrim").classList.add("open"); $(sel).classList.add("open"); }
+  function closeAll(){ ["#scrim","#pdp","#cart"].forEach(function(s){$(s).classList.remove("open")}); }
+  $("#scrim").addEventListener("click", closeAll);
+  document.addEventListener("click", function(e){ if(e.target.closest("[data-close]")) closeAll(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") closeAll(); });
+  $("#chips").addEventListener("click", function(e){ var b=e.target.closest("[data-cat]"); if(b) setCategory(b.dataset.cat,"filter_chip"); });
+  document.querySelectorAll("[data-nav]").forEach(function(b){ b.addEventListener("click", function(){ setCategory(b.dataset.nav,"top_nav"); $("#shop").scrollIntoView({behavior:"smooth"}); }); });
+  $("#grid").addEventListener("click", function(e){ var c=e.target.closest(".card"); if(c) openProduct(c.dataset.id,"product_grid"); });
+  $("#hero-cta").addEventListener("click", function(){ track("Promotion Clicked", {promotion_id:"ridgeline-4-wet-season", creative:"homepage_hero", position:"hero"}); setCategory("Trail shoes","hero"); $("#shop").scrollIntoView({behavior:"smooth"}); });
+  $("#hero-view").addEventListener("click", function(){ openProduct("ACM-TR-002","homepage_hero"); });
+
+  renderChips(); renderGrid(); renderCart();
+})();
+</script>
+</body>
+</html>
 
